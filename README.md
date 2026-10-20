@@ -1,4 +1,4 @@
-# RoboNest AI Office 🤖🏢
+# RoboNest AI Office (Developing phase...)
 
 > Autonomous Multi-Agent AI Office with 3D Visualizer & Independent Python Backend Brain.
 
@@ -8,7 +8,7 @@ RoboNest separates the **Brain (Backend)** from the **Visualizer (UI)** cleanly:
 
 ---
 
-## 🏛️ Architecture
+## Architecture
 
 ```
 Electron App (3D Office, Calendar, Plugins UI)
@@ -27,7 +27,7 @@ Python Backend Brain (Async API + WebSockets)
 
 ---
 
-## 👥 The Agent Team
+## The Agent Team
 
 | Agent | Role | Color / Avatar | Specialty |
 |---|---|---|---|
@@ -38,7 +38,7 @@ Python Backend Brain (Async API + WebSockets)
 
 ---
 
-## 🛡️ Safety & Core Engineering Rules
+## Safety & Core Engineering Rules
 
 1. **Hardware-Friendly Concurrency**:
    Local LLMs (e.g., Ollama) run through an `asyncio.Lock` queue. Only one LLM inference executes at a time to prevent GPU/RAM memory saturation.
@@ -53,7 +53,7 @@ Python Backend Brain (Async API + WebSockets)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 robonest/
@@ -101,7 +101,7 @@ robonest/
 
 ---
 
-## 🚀 Quickstart Guide
+## Quickstart Guide
 
 ### 1. Test Backend Directly from Terminal (No UI required)
 Run a test task to verify Zed -> Agent -> Tool -> Result:
@@ -128,7 +128,7 @@ Electron will launch the backend process automatically and display the 3D office
 
 ---
 
-## ⚙️ Configuration & Environment
+## Configuration & Environment
 
 You can configure settings via environment variables or a `.env` file:
 
@@ -147,7 +147,7 @@ OPENAI_MODEL=gpt-4o-mini
 
 ---
 
-## 📦 Packaging for SaaS / Desktop Distribution
+## Packaging for SaaS / Desktop Distribution
 - **Backend Binary**: Bundle Python backend using PyInstaller:
   ```bash
   pyinstaller --onefile --name robonest-brain backend/main.py

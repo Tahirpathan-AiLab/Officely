@@ -1,0 +1,26 @@
+{
+  "name": "robonest",
+  "version": "1.0.0",
+  "description": "RoboNest - Autonomous Multi-Agent AI Office with 3D UI & Python Brain",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "backend": "python3 -m backend.main",
+    "cli": "python3 -m backend.cli",
+    "test": "python3 -m unittest discover -s tests -p 'test_*.py'"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "orchestrator",
+    "multi-agent",
+    "threejs",
+    "fastapi"
+  ],
+  "author": "Tanvir & Tahir",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8"
+  }
+}

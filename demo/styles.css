@@ -1,0 +1,212 @@
+:root {
+  --color-bg-dark: #0f172a;
+  --color-surface-dark: #1e293b;
+  --color-surface-card: #182234;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-border: #334155;
+  --color-accent-pink: #f08a9d;
+  --font-family-base: system-ui, -apple-system, sans-serif;
+  --max-width-container: 1200px;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 4rem;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.theme-dark {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.brand-name .accent {
+  color: var(--color-accent-pink);
+}
+
+.main-nav .nav-list {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-md);
+}
+
+.nav-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-pink);
+  color: #111827;
+  border: 1px solid transparent;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.hero-section {
+  padding: var(--spacing-xl) 0;
+  background: radial-gradient(circle at 50% 20%, rgba(240, 138, 157, 0.1), transparent 70%);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(240, 138, 157, 0.15);
+  color: var(--color-accent-pink);
+  border: 1px solid rgba(240, 138, 157, 0.3);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: var(--spacing-md);
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+}
+
+section {
+  padding: var(--spacing-xl) 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  font-weight: 700;
+}
+
+.features-grid,
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.card {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+.feature-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.agent-card {
+  border-top: 4px solid var(--agent-accent, var(--color-accent-pink));
+}
+
+.agent-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--agent-accent, var(--color-accent-pink));
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.agent-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.agent-card .role {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-lg) 0;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}

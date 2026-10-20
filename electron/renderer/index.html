@@ -424,6 +424,89 @@ const logs=[],perms=[];let dirty=true,pid=0,zedBusy=0,dark=false;
 const hm=()=>new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
 function log(who,t){logs.unshift({t:hm(),who,x:ne(t)});logs.length=Math.min(logs.length,40);dirty=true}
 function say(r,t,d=2.8){r.bub.textContent=ne(t);r.bub.classList.add("show");r.bt=d;r.hop=r.sleep?0:.45;r.hap=HAPPY.test(t)?d+.4:0}
+const OFFICE_CHAT={
+AE:[
+  ["Evaan, did you get a chance to enjoy the sunshine today?","A little, on my way in. It was lovely."],
+  ["I brought some oranges for the table.","Perfect timing. I was just looking for a snack."],
+  ["That song in the café was stuck in my head all morning.","Same! I caught myself humming it on the way here."],
+  ["Do you have any plans for the weekend?","I might visit the market and take it easy."],
+  ["I saw the prettiest flowers on my way here.","What color were they? I love finding little things like that."],
+  ["I finally remembered to water my plants this morning.","They must be happy to see you!"],
+  ["I could listen to rain on the window all afternoon.","It's such a cozy sound, especially with a warm drink."],
+  ["Have you ever tried making pancakes from scratch?","Yes, though the first one always comes out a little funny."]
+],
+AL:[
+  ["Lumi, have you tried the new tea in the kitchen?","Not yet. Is it any good?"],
+  ["I think we deserve a proper lunch break today.","Agreed. No eating at the desk this time."],
+  ["It got so windy on my way here.","I know! I nearly lost my hat at the corner."],
+  ["Do you prefer rainy days or sunny ones?","Sunny, as long as it isn't too hot."],
+  ["I slept right through my alarm this morning.","That sounds like you needed the rest."],
+  ["I keep meaning to try that little bakery nearby.","Let's go together one day. Their window always smells amazing."],
+  ["Do you have a favorite kind of music?","A bit of everything, depending on the day."],
+  ["I found my old scarf in the closet.","The cozy one? It's perfect for this weather."]
+],
+EL:[
+  ["Lumi, do you know a good place nearby for lunch?","There's a little café around the corner. Their sandwiches are great."],
+  ["I finally finished that book I was telling you about.","Was the ending as good as you hoped?"],
+  ["Someone left cookies in the kitchen.","I saw them! I saved one for later."],
+  ["I could really use a quiet afternoon.","Same here. A little calm sounds nice."],
+  ["I forgot my umbrella again.","There's a spare one by the door. Take it if you need."],
+  ["I watched the funniest clip on the bus.","Now I want to know what happened!"],
+  ["Do you like cooking at home?","I do, especially when someone else helps with the dishes."],
+  ["I think I need a new pair of walking shoes.","Comfortable ones make such a difference."]
+],
+AZ:[
+  ["Zed, did you sleep well?","Pretty well, thanks. I woke up in a very good mood."],
+  ["Any idea what the weather will be like later?","Looks like a nice day. Maybe a short walk after lunch?"],
+  ["I can't decide what to have for lunch.","I'm leaning toward soup. Something warm sounds good."],
+  ["That was a lovely cup of tea.","It really hit the spot, didn't it?"],
+  ["Zed, do you know where I left my notebook?","I saw it near the lounge chairs a little while ago."],
+  ["I could use a little fresh air.","Let's step outside for a few minutes after lunch."],
+  ["The morning went by quickly.","It did. I hope the afternoon feels just as easy."],
+  ["I found a coin on the floor earlier.","Maybe it will bring us a little luck today."]
+],
+EZ:[
+  ["Zed, have you heard the birds outside this morning?","I have. They sound especially cheerful today."],
+  ["I might take a little walk after work.","That sounds refreshing. Hope the weather holds up."],
+  ["Do you have a favorite season?","Probably autumn. The air feels so nice then."],
+  ["The office feels cozy today.","It does. A nice, peaceful kind of day."],
+  ["Zed, have you seen my blue mug?","I think it's on the table beside the window."],
+  ["I woke up before sunrise today.","Did you enjoy the quiet, or go straight back to sleep?"],
+  ["I love the smell of fresh bread.","Me too. It always makes a place feel welcoming."],
+  ["I might call my family this evening.","I hope you have a lovely catch-up."]
+],
+LZ:[
+  ["Zed, did you bring anything nice for lunch?","Just a simple sandwich. What about you?"],
+  ["I could go for a walk and some fresh air.","Let's do that after this cup of tea."],
+  ["Have you watched anything fun lately?","I watched a silly comedy last night. It made me laugh."],
+  ["I think I'll have another cup of tea.","Good idea. I'll join you."],
+  ["It feels like a good day to slow down a little.","I agree. We can take the afternoon one step at a time."],
+  ["Zed, do you know any good board games?","I like the ones where everyone ends up laughing."],
+  ["I nearly took the wrong bus this morning.","Glad you made it here in the end!"],
+  ["What snack do you reach for when you're hungry?","Usually fruit, unless there's a biscuit nearby."],
+  ["I should stretch my legs for a bit.","Good idea. Sitting still for too long makes me restless."],
+  ["I heard someone humming in the hallway.","Maybe that cheerful tune is catching on."]
+]
+};
+function privateOfficeChat(workers){
+  const pairs=[];
+  for(let i=0;i<workers.length;i++)for(let j=i+1;j<workers.length;j++){
+    const a=workers[i],b=workers[j];
+    if(a.at==="lounge"&&b.at==="lounge"&&a.sit&&b.sit&&!a.tsk&&!b.tsk&&!a.chatting&&!b.chatting)
+      pairs.push([a,b]);
+  }
+  if(!pairs.length)return;
+  const [a,b]=pairs[Math.floor(Math.random()*pairs.length)],key=[a.k,b.k].sort().join(""),
+    exchange=OFFICE_CHAT[key][Math.floor(Math.random()*OFFICE_CHAT[key].length)];
+  a.chatting=b.chatting=true;
+  say(a,exchange[0],4);
+  setTimeout(()=>{
+    if(dark||a.at!=="lounge"||!a.sit||a.tsk||b.at!=="lounge"||!b.sit||b.tsk){a.chatting=b.chatting=false;return}
+    say(b,exchange[1],4);
+    log(a.d.n+" ↔ "+b.d.n+" (private)",a.d.n+": "+exchange[0]+"  "+b.d.n+": "+exchange[1]);
+    a.chatting=b.chatting=false;
+  },1500);
+}
 const LOUT=-1.7,ZX=3.7,LSX={L:-1.95,E:-.65,A:.65,Z:1.95};
 function seat(k){return[DESKS[defs[k].desk][0],1.4]}
 function lseat(k){return[LTX+LSX[k],-.45]}
@@ -456,11 +539,12 @@ if(!ok.length){setTimeout(()=>{say(R.Z,"Everyone is busy 😅",3);log("Zed","Eve
 ok.forEach((k,i)=>setTimeout(()=>startTask(k,txt),1000+i*600))}
 function permResp(id,okk){const i=perms.findIndex(p=>p.id===id);if(i<0)return;const p=perms.splice(i,1)[0],r=R[p.k];r.tsk.ph="work";dayAdd(d=>okk?d.ok++:d.no++);notifyClear(p.id);
 if(okk){zsay("Permission granted. "+r.d.n+" is back to work.");log(r.d.n,"Permission granted: "+p.title);say(r,"Thanks! 🙌")}else{zsay(r.d.n+" will skip that step.");log(r.d.n,"Permission denied: "+p.title+" — skipping that step");say(r,"Okay, skipping that 👍");r.tsk.p=Math.max(r.tsk.p,80)}dirty=true}
-let er=12,zi=0;
+let er=12,zi=0,officeChatIn=8+Math.random()*8;
 function think(dt){const Z=R.Z,W=["E","L","A"].map(k=>R[k]);if(zedBusy>0)zedBusy-=dt;
 if(dark)return;
 if(Z.at==="recep"&&!Z.path.length&&zedBusy<=0&&!W.some(r=>r.tsk)&&!zGoing){zi+=dt;if(zi>10){zi=0;toLounge(Z);log("Zed","No active task; joining the team at the lounge table")}}else zi=0;
 W.forEach(r=>{if(!r.tsk&&!r.path.length&&r.at!=="lounge"){r.it=(r.it||0)+dt;if(r.it>1.5){r.it=0;toLounge(r)}}});
+officeChatIn-=dt;if(officeChatIn<=0){officeChatIn=18+Math.random()*20;privateOfficeChat([Z,...W])}
 er-=dt;if(er<=0){er=14+Math.random()*8;const c=W.filter(r=>r.at==="lounge"&&r.sit&&!r.tsk);if(c.length){const r=c[Math.floor(Math.random()*c.length)],tx=Math.random()<.5?[7.1,-3.4]:[6,-3.4];go(r,[[tx[0],tx[1]]],()=>{r.it=-2.5})}}}
 ["E","L","A"].forEach(k=>{const r=R[k],[x,z]=lseat(k);r.g.position.set(x,.2,z);sitLounge(r)});
 R.Z.g.position.set(0,0,-3.75);sitRecep(R.Z);
